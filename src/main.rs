@@ -61,7 +61,7 @@ async fn check_server(address: &ServerAddress) -> Result<PingResults, Box<dyn Er
         Some(SEND_HOSTNAME),
         Some(SEND_PORT),
     );
-    let ping_response = timeout(Duration::from_millis(10000), ping_response_future).await??;
+    let ping_response = timeout(Duration::from_millis(2000), ping_response_future).await??;
     let protocol_version: i32 = Ping::get_protocol_version(&ping_response)?;
 
     let mut client: Client = Client::connect(&addr.host, Some(addr.port)).await?;
@@ -71,7 +71,7 @@ async fn check_server(address: &ServerAddress) -> Result<PingResults, Box<dyn Er
         Some(SEND_PORT),
         Some(SEND_USERNAME),
     );
-    let (online_mode, other) = timeout(Duration::from_millis(10000), online_mode_future).await??;
+    let (online_mode, other) = timeout(Duration::from_millis(2000), online_mode_future).await??;
 
     Ok(PingResults {
         address: addr,
