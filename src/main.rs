@@ -109,7 +109,7 @@ async fn pull_ips() -> Result<Vec<ServerAddress>, Box<dyn Error>> {
 
 async fn read_ips() -> Result<Vec<ServerAddress>, Box<dyn Error>> {
     let mut res = vec![];
-    let file = File::open("dam_ips").await?;
+    let file = File::open("ips.txt").await?;
     let reader = BufReader::new(file);
     let mut lines = reader.lines();
     while let Some(line) = lines.next_line().await? {
